@@ -1,5 +1,5 @@
 # E-Commerce-Website #famous_brand_ecommerce_website #aesthetic website
-E-commerce Website using django
+E-commerce Website using python django
 
 ##to run 
 python manage.py makemigrations
