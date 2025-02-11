@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static "css/shop.css" %}">
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="{% static "images/output-onlinepngtools.png" %}" class="logo" alt="logo" height="100px"></a>
+       <div>
+        <ul id="navbar">
+            <li><a class="active" href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'shop' %}">Shop</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'About' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a></li>
+        </ul>
+       </div>
+       </section>
+       {% for i in abc %}
+    <section id="product1" class="section-p1">
+        <div class="pro-container">
+            <div class="pro">
+                <img src="{{i.image.url}}" alt="cloth image"> 
+                <div class="des">
+                <span>{{i.brand_name}}</span>
+                <h5>{{i.title}}</h5>
+                <h4>Rs.{{i.price}}</h4>
+                </div>
+                <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+            </div>
+        </div>
+       </section>
+       {% endfor %}
+</body>
+</html>

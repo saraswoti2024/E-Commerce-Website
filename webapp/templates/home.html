@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+</head>
+
+<body>
+   <section id="header">
+    <a href="#"><img src="{% static "images/output-onlinepngtools.png" %}" class="logo" alt="logo" height="100px"></a>
+   <div>
+    <ul id="navbar">
+        <li><a class="active" href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'shop' %}">Shop</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li><a href="{% url 'About' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a></li>
+    </ul>
+   </div>
+   </section>
+
+   <section id="hero">
+    <h4>Exclusive</h4>
+    <h2>Super Value deals</h2>
+    <h1>On all Products</h1>
+    <p>save more with coupons & up to 70% off!</p>
+    <a href="{% url 'shop' %}"><button>Shop Now</button></a>
+   </section>
+
+   <section id="feature" class="section-p1">
+    <div class="fe-box">
+        <img src="{% static "images/versace.png" %}" alt="">
+    </div>
+
+    <div class="fe-box">
+        <img src="{% static "images/versace.png" %}" alt="" >
+    </div>
+
+    <div class="fe-box">
+        <img src="{% static "images/dior.png" %}" alt="" >
+    </div>
+
+    <div class="fe-box">
+        <img src="{% static "images/louis.png" %}" alt="" >
+    </div>
+
+    <div class="fe-box">
+        <img src="{% static "images/gucci.png" %}" alt="">
+    </div>
+    <div class="fe-box">
+        <img src="{% static "images/shein.png" %}" alt="">
+    </div>
+
+   </section>
+
+   <section id="product1" class="section-p1">
+    <h2>Featured Products</h2>
+    <p>Winter Collection</p>
+    <div class="pro-container">
+        <div class="pro">
+            <img src="{% static "images/model1.png" %}" alt="">
+            <div class="des">
+            <span>versace</span>
+            <h5>Metal Mesh Wool Blazer Dress</h5>
+            <h4>Rs.96100</h4>
+            </div>
+            <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+        </div>
+        <div class="pro">
+            <img src="{% static "images/Sweater.png" %}" alt="">
+            <div class="des">
+            <span>Dior</span>
+            <h5>Macrocannage Zipped Cardigan</h5>
+            <h4>Rs.83150</h4>
+            </div>
+            <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+        </div>
+        <div class="pro">
+            <img src="{% static "images/cashmirsweater.png" %}" alt="">
+            <div class="des">
+            <span>Ralphlauren</span>
+            <h5>Cable-Knit Cashmere Sweater</h5>
+            <h4>Rs.49000</h4>
+            </div>
+            <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+        </div>
+        <div class="pro">
+            <img src="{% static "images/longcoat.png" %}" alt="">
+            <div class="des">
+            <span>Gucci</span>
+            <h5>Suede cape with Horsebit</h5>
+            <h4>Rs.70000</h4>
+            </div>
+            <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+        </div>
+        <div class="pro">
+            <img src="{% static "images/knit-mitten-top.png" %}" alt="">
+            <div class="des">
+            <span>Louis Vuitton</span>
+            <h5>Graphic Technical Knit Mitten Top </h5>
+            <h4>Rs.30000</h4>
+            </div>
+            <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+        </div>
+        <div class="pro">
+            <img src="{% static "images/wooljacket.png" %}" alt="">
+            <div class="des">
+            <span>Gucci</span>
+            <h5>Embroidered houndstooth wool jacket</h5>
+            <h4>Rs.11100</h4>
+            </div>
+            <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+        </div>
+    </div>
+   </section>
+
+   <section id="banner" class="section-m1">
+    <h2>up to <span>10% off</span>- All winter products</h2>
+    <button class="normal">Explore More</button>    
+   </section>
+
+   <section id="sm-banner" class="section-p1">
+    <div class="banner-box">
+        <h4>New-arrivial</h4>
+        <span>Collection of all Season</span>
+        <button class="white">Collection</button>
+    </div>
+    <div class="banner-box banner-box2">
+        <h4>Top-Sales</h4>
+        <span>Collection of all Season</span>
+        <button class="white">Collection</button>
+    </div>
+   </section>
+    <script src="{% static "js/home.js" %}"></script>
+</body>
+</html>
