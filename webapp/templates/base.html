@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
 </head>
 <body>
     <section id="header">
@@ -17,6 +19,11 @@
             <li><a href="{% url 'About' %}">About</a></li>
             <li><a href="{% url 'contact' %}">Contact Us</a></li>
             <li><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a></li>
+            <form method="GET" action="{% url 'shop' %}">
+                <input type="text" name="searches" placeholder="Search products" class="sear">
+                <!-- <button type="submit" class="sears">Search</button> -->
+            </form>
+       
         </ul>
        </div>
        </section>
