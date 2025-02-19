@@ -1,3 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:monospace;
+}
+
+h1{
+    font-size: 50px;
+    line-height: 64px;
+    color: black;
+}
+
+h2{
+    font-size: 46px;
+    line-height: 54px;
+    color: black;
+}
+
+h3{
+    font-size: 20px;
+    color: black;
+}
+
+h4{
+    font-size: 20px;
+    color: black;
+}
+
+h5{
+    font-weight: 700;
+     font-size: 13px;
+ }
+
+h6{
+   font-weight: 700;
+    font-size: 12px;
+}
+
+p{
+    font-size: 16px;
+    color: rgb(88, 88, 88);
+}
+
+.section-p1{
+    padding : 40px 80px;
+}
+
+.section-m1{
+    margin : 40px 0;
+}
+
+button.normal {
+    font-size: 16px;
+    font-weight: 100;
+    padding: 15px 30px;
+    color: black;
+    background-color: white ;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+}
+
+button.white {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 18px;
+    color: rgb(85, 64, 64);
+    background-color: transparent ;
+    border-radius: 2px;
+    cursor: pointer;
+    border: 1px solid white;
+    outline: none;
+    transition: 0.2s;
+}
+
+.body{
+    width: 100%;
+}
+
+/* header start */
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 80px;
+    background-color: rgba(187, 161, 111, 0.784);
+    box-shadow: 0 5px 15px rgb(111, 104, 66);
+    z-index: 999;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbar li{
+    list-style: none;
+    padding: 0 30px;
+    position: relative;
+}
+
+#navbar li a{
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    transition: 0.3s ease;
+
+}
+
+.sear{
+    border: solid 2px black;
+    height: 27px;
+}
+
+
+.sears{
+    border: solid 2px black;
+    height: 27px;
+    /* width: 100%; */
+}
+#navbar li a:hover,
+#navbar li a.active {
+    color: rgb(251, 242, 195);
+}
+
+#navbar li a.active::after,
+#navbar li a:hover::after{
+    content: "";
+    width: 50%;
+    height:1px;
+    background-color: rgb(224, 214, 137);
+    position: absolute;
+    bottom : -5px;
+    left: 15px;
+}
 
 /* home page */
 
@@ -133,74 +277,4 @@
     right: 10px;
 }
 
-#banner{
-    display: flex;
-    flex-direction: column;
-    justify-content:center ;
-    align-items: center;
-    text-align: center;
-    background-image: url("image/background-of-kraft-paper-or-cardboard-texture-vector-47419683.jpg");
-    width: 100%;
-    height: 30vh;
-    background-size:cover;
-    background-position: center;
-}
-
-#banner h2{
-    color: white;
-    font-size: 30px;
-    padding:10px 0;
-}
-
-#banner h2 span{
-    color: rgb(53, 121, 170);
-}
-
-#banner button:hover{
-    background-color: rgb(118, 145, 163);
-    color: aliceblue;
-}
-
-#sm-banner{
-     display: flex;
-     justify-content: space-between;
-     flex-wrap: wrap;
-
-}
-
-#sm-banner .banner-box{
-    display: flex;
-    flex-direction: column;
-    justify-content:center ;
-    align-items: flex-start;
-    background-image: url("https://www.versace.com/dw/image/v2/BGWN_PRD/on/demandware.static/-/Sites-ver-master-catalog/default/dwfc6688b0/original/90_1018635-1A12258_1B000_18_MetalMeshWoolBlazerDress-Blazer~~Jackets-Versace-online-store_0_2.jpg?sw=850&q=85&strip=true");
-    min-width: 580px;
-    height: 50vh;
-    background-size:cover;
-    background-position: center;
-    padding: 30px;
-}
-
-#sm-banner .banner-box2{
-    background-image: url("image/chinesemodel.jpg");
-}
-
-
-#sm-banner h4{
-    color: aliceblue;
-    font-size: 28px;
-    font-weight: 800;
-}
-
-#sm-banner span{
-    color: rgb(80, 64, 57);
-    font-size: 14px;
-    font-weight: 500;
-    padding-bottom: 15px;
-}
-
-#sm-banner .banner-box:hover button{
-    background-color: rgb(154, 163, 178);
-    border: 1px solid  rgb(154, 163, 178) ;
-}
 
