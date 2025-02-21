@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Product,Users
+from django.contrib import messages 
+
 
 # Create your views here.
 def home(request):
@@ -21,7 +23,9 @@ def contact(request):
         message = data.get('message')
     
         user = Users(email=email,number=phone,address=address,messages=message)
-        user.save()
+        messages.success(request,'Form successfully submitted!')
+        return redirect('contact')
+        # user.save()
     return render(request,'contact.html')
 
 def cart(request):
