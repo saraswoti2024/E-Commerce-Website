@@ -21,11 +21,16 @@ def contact(request):
         phone = data.get('ph')
         address = data.get('address')
         message = data.get('message')
-    
-        user = Users(email=email,number=phone,address=address,messages=message)
-        messages.success(request,'Form successfully submitted!')
-        return redirect('contact')
-        # user.save()
+
+        try:
+             user = Users(email=email,number=phone,address=address,messages=message)
+             user.full_clean() ##models ma vako validate garxa herxa ,thikxa vane save hunxa
+             user.save()
+             messages.success(request,f" your form submitted successfully")
+             return redirect('contact')
+        except Exception as e:
+            messages.error(request,f"Error: {str(e)}")
+            return redirect('contact')
     return render(request,'contact.html')
 
 def cart(request):
