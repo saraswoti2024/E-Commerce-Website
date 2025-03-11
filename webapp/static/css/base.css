@@ -276,5 +276,9 @@ button.white {
     bottom: 10px;
     right: 10px;
 }
+.btt{
+    color: aqua;
+    background-color: rgb(216, 163, 163);
+}
 
 

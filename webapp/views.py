@@ -2,17 +2,22 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Product,Users
 from django.contrib import messages 
-
+from django.contrib import messages
+from django.db.models import Q
+from django.core.mail import send_mail,EmailMessage
+from django.template.loader import render_to_string
+from datetime import datetime
+import phonenumbers
 
 # Create your views here.
 def home(request):
-    return render(request,'home.html')
+    return render(request,'webapp/home.html')
 
 def blog(request):
-    return render(request,'blog.html')
+    return render(request,'webapp/blog.html')
 
 def About(request):
-    return render(request,'About.html')
+    return render(request,'webapp/About.html')
 
 def contact(request):
     if request.method=='POST':
@@ -31,10 +36,10 @@ def contact(request):
         except Exception as e:
             messages.error(request,f"Error: {str(e)}")
             return redirect('contact')
-    return render(request,'contact.html')
+    return render(request,'webapp/contact.html')
 
 def cart(request):
-    return render(request,'cart.html')
+    return render(request,'webapp/cart.html')
 
 def shop(request):
     # data = product.objects.filter(title="belt")
@@ -44,5 +49,10 @@ def shop(request):
         data = Product.objects.filter(title__icontains=searched)
     else:
         data = Product.objects.all()
-    return render(request,'shop.html',{'abc':data})  ##admin lai use garna abc-> admin page ma hernu
+    return render(request,'webapp/shop.html',{'abc':data})  ##admin lai use garna abc-> admin page ma hernu
 
+def log_in (request):
+    return render(request,'auth/log_in.html')
+
+def register(request):
+    return render(request,'auth/register.html')

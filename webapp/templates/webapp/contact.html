@@ -3,7 +3,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static "css/contact.css" %}">
 <div class="contactform">
-    <form class="form" method="POST" action="{% url 'contact' %}">
+    <form class="form" method="POST" action="{% url 'contact' %}"  id="ContactForm">
         {% csrf_token %}
         {% if messages %}
             <div id="msg">
@@ -17,7 +17,8 @@
         {% endif %}
         <div class="title">Contact us</div>
         <input type="text" placeholder="Your email" class="input" name="email">  
-        <input type="tel" placeholder="Phone Number" class="input" name="ph"> 
+        <input type="tel" placeholder="Phone Number" class="input" name="ph" id="phone"> 
+        <span style="color: red; display: none;" id="error_msg">Invalid Phone Number</span>
         <input type="text" placeholder="Address" class="input" name="address"> 
         <textarea placeholder="Your message" name="message"></textarea>
         <button>Submit</button>
