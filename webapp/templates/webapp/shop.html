@@ -3,7 +3,19 @@
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{% static "css/shop.css" %}">
-       {% for i in abc %}
+<section id="product1" class="section-p1">
+<div class="category ">
+            {% for i in cate  %}
+            <ul  type="none">
+                <a href="?Categ={{i.id}}" ><li class=" 
+                    {% if request.GET.Categ == i.id|stringformat:'s' %}
+                    active-tab
+                   {% endif %}" >{{i.catitle}}</li></a>
+            </ul>
+            {% endfor %}
+        </div>
+        </section>
+       {% for i in data1 %}
     <section id="product1" class="section-p1">
         <div class="pro-container">
             <div class="pro">

@@ -7,6 +7,8 @@ from django.db.models import Q
 from django.core.mail import send_mail,EmailMessage
 from django.template.loader import render_to_string
 from datetime import datetime
+from django.contrib.auth.models import User
+from .models import *
 import phonenumbers
 
 # Create your views here.
@@ -42,17 +44,43 @@ def cart(request):
     return render(request,'webapp/cart.html')
 
 def shop(request):
-    # data = product.objects.filter(title="belt")
-    # data = product.objects.all()
-    searched = request.GET.get('searches')
-    if searched:
+    data = Product.objects.all()
+    categoryy = Category.objects.all()
+
+    cateid = request.GET.get('Categ') 
+    searched = request.GET.get('searches')  
+    if cateid :
+        data = Product.objects.filter(Category1=cateid)
+ 
+    elif searched:
         data = Product.objects.filter(title__icontains=searched)
+
     else:
-        data = Product.objects.all()
-    return render(request,'webapp/shop.html',{'abc':data})  ##admin lai use garna abc-> admin page ma hernu
+          data = Product.objects.all()
+
+    context={
+        'cate': categoryy,
+        'cateid' : cateid,
+        'data1' : data,
+    }
+    return render(request,'webapp/shop.html',context)  ##admin lai use garna abc-> admin page ma hernu
 
 def log_in (request):
     return render(request,'auth/log_in.html')
 
-def register(request):
-    return render(request,'auth/register.html')
+# def register(request):
+#     if request.method=='POST':
+#         fname = request.POST['fname']
+#         lname = request.POST['lname']
+#         uname = request.POST['uname']
+#         password = request.POST['password']
+#         password1 = request.POST['password1']
+#         if password == password1:
+#             User.objects.create_user(first_name=fname,last_name=lname,username=uname,password=password)
+#             messages.success(request,'Registered Successfully')
+#             return redirect('log_in')
+#         else:
+#             messages.error(request,'password and confirm password should be similar') 
+#             return redirect('register')           
+
+#     return render(request,'auth/register.html')
