@@ -1,0 +1,15 @@
+.category {
+    display: flex;
+}
+
+.category ul li{
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.active-tab{
+    background-color: antiquewhite;
+    color: black;
+ }

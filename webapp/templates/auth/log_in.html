@@ -1,0 +1,137 @@
+<html>
+  {% load static %}
+  <head>
+    <!-- basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <!-- site metas -->
+
+    <!-- favicon -->
+    <link rel="icon" href="{% static 'favicon_io/favicon.ico' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'favicon_io/android-chrome-512x512.png' %}"
+      sizes="192x192"
+    />
+
+    <title> </title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    />
+
+    <!-- aos  -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- intel-tel css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/25.2.1/build/css/intlTelInput.min.css"
+      integrity="sha512-X3pJz9m4oT4uHCYS6UjxVdWk1yxSJJIJOJMIkf7TjPpb1BzugjiFyHu7WsXQvMMMZTnGUA9Q/GyxxCWNDZpdHA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/s.css' %}" />
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="form-container">
+        <!-- From Uiverse.io by bociKond -->
+        <form class="form" method="POST" action="{% url 'log_in' %}">
+          {% csrf_token %}
+          <span class="input-span">
+            <label for="username" class="label">User Name</label>
+            <input type="text" name="username" id="email"
+          /></span>
+          <!-- <input type="hidden" name="next" value="{{next}}"> -->
+          <span class="input-span">
+            <label for="password" class="label">Password</label>
+            <input type="password" name="password" id="password" />
+            <i class="fa-solid fa-eye" id="eyeicon"></i>
+          </span>
+          <span class="span">
+          <input class="remember" type="checkbox" value="remember"  name="remember"/>
+          <a href="#">Remember me</a>
+        </span>
+          <span class="span"><a href="#">Forgot password?</a>
+            <a href="#">Change password</a></span>
+
+          <input class="submit" type="submit" value="Login" />
+          <span
+         
+            >Don't have an account?
+            <a class="po" href="{% url 'register' %}">Register</a></span>
+        </form>
+      </div>
+    </div>
+    <script>
+      eyeicon = document.getElementById("eyeicon");
+      password = document.getElementById("password");
+      eyeicon.onclick = function () {
+        if (password.type == "password") {
+          password.type = "text";
+          eyeicon.classList.remove("fa-eye");
+          eyeicon.classList.add("fa-eye-slash");
+        } else {
+          password.type = "password";
+          eyeicon.classList.remove("fa-eye-slash");
+          eyeicon.classList.add("fa-eye");
+        }
+      };
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/b52396679f.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- aos js -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- intel-tel-input -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/25.2.1/build/js/intlTelInput.min.js"
+      integrity="sha512-IkaM8IicdlJR0eLhPoAHBeDXxQ8QTjVfo7O9hwowr8gTmxZOlV0Z51HFYIDmftcLmdejUlGam6uYVU3k7xP/4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- script.js link -->
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>

@@ -9,6 +9,9 @@ from django.template.loader import render_to_string
 from datetime import datetime
 from django.contrib.auth.models import User
 from .models import *
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+import re
 import phonenumbers
 
 # Create your views here.
@@ -68,19 +71,52 @@ def shop(request):
 def log_in (request):
     return render(request,'auth/log_in.html')
 
-# def register(request):
-#     if request.method=='POST':
-#         fname = request.POST['fname']
-#         lname = request.POST['lname']
-#         uname = request.POST['uname']
-#         password = request.POST['password']
-#         password1 = request.POST['password1']
-#         if password == password1:
-#             User.objects.create_user(first_name=fname,last_name=lname,username=uname,password=password)
-#             messages.success(request,'Registered Successfully')
-#             return redirect('log_in')
-#         else:
-#             messages.error(request,'password and confirm password should be similar') 
-#             return redirect('register')           
+def register(request):
+    if request.method=='POST':
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        uname = request.POST['uname']
+        password = request.POST['password']
+        password1 = request.POST['password1']
+        email = request.POST['email']
+        error_messages = []
+        if password != password1:
+            error_messages.append('password and confirm password should be similar')
+        try:
+            validate_password(password) ##password's policy
+        except ValidationError as e:
+            for error in e.messages:
+                error_messages.append(error)
 
-#     return render(request,'auth/register.html')
+        if password == uname:
+            error_messages.append('username and password must be different')
+           
+        # if not re.search(r'[A-Z]',password): #capital letter
+        #     error_messages.append('Password must contain at least one capital letter')
+           
+        # if not re.search(r'\W',password): #specialcharacter
+        #     error_messages.append('Password must contain at least one Special character')
+       
+        if not re.search(r'\d',password): #numbers
+            error_messages.append('Password Should at least contain one number')
+            
+        if not re.search(r'\d',uname):
+            error_messages.append('Username should at least contain one numeric value')
+            
+        if User.objects.filter(username=uname).exists():
+            error_messages.append('Username already exists')
+           
+        if User.objects.filter(email=email).exists():
+            error_messages.append('email already exists')
+        
+        if not error_messages:
+            User.objects.create_user(first_name=fname,last_name=lname,username=uname,password=password,email=email)
+            messages.success(request,'Registered Successfully,Redirecting to Login page...')
+            return redirect('register')
+        
+        else:
+            for error in error_messages:
+                messages.error(request,error)
+            return redirect('register')           
+
+    return render(request,'auth/register.html')

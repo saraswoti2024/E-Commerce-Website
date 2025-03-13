@@ -1,0 +1,155 @@
+{% load static %}
+
+<head>
+  <!-- basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- mobile metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+  <!-- site metas -->
+
+  <!-- favicon -->
+  <link rel="icon" href="{% static 'favicon_io/favicon.ico' %}" />
+  <link rel="stylesheet" href="{% static 'favicon_io/android-chrome-512x512.png' %}" sizes="192x192" />
+
+  <title> </title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+    media="screen" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" />
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
+  <!-- aos  -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- intel-tel css -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/25.2.1/build/css/intlTelInput.min.css"
+    integrity="sha512-X3pJz9m4oT4uHCYS6UjxVdWk1yxSJJIJOJMIkf7TjPpb1BzugjiFyHu7WsXQvMMMZTnGUA9Q/GyxxCWNDZpdHA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" />
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/s.css' %}" />
+</head>
+<style>
+  .cross {
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+
+  .cross:hover {
+    color: red;
+    scale: 1.2;
+  }
+</style>
+<div>
+  <a href="{% url 'home' %}">
+    <img src="{% static 'images/logo.png' %}" alt="logo" width="50px" height="50px" /></a>
+</div>
+<div class="main">
+  <div class="form-container">
+    <!-- From Uiverse.io by Yaya12085 -->
+    <form class="form" method="POST" action="{% url 'register' %}">
+      {% csrf_token %}
+      <h1 class="cross"><i class="fa-solid fa-xmark"></i></h1>
+      <p class="title">Register</p>
+      <p class="message">Signup now and get full access to our app.</p>
+      <div class="flex">
+        <label>
+          <input required="" placeholder="" type="text" class="input" name="fname" />
+          <span>Firstname</span>
+        </label>
+
+        <label>
+          <input required="" placeholder="" type="text" class="input" name="lname" />
+          <span>Lastname</span>
+        </label>
+      </div>
+      <label>
+        <input required="" placeholder="" type="text" class="input" name="uname" />
+        <span>Username</span>
+      </label>
+      <label>
+        <input required="" placeholder="" type="email" class="input" name="email" />
+        <span>Email</span>
+      </label>
+
+      <label>
+        <input required="" placeholder="" type="password" class="input" name="password" />
+        <span>Password</span>
+      </label>
+
+      <label>
+        <input required="" placeholder="confirm password" type="password" class="input" name="password1"
+          id="password" />
+        <span class="i-box"><i class="fa-solid fa-eye" id="eyeicon"></i></span>
+      </label>
+
+      <button class="submit">Submit</button>
+      <p>
+        Already have an account ?
+        <a class="po" href="{% url 'log_in' %}">Login</a>
+      </p>
+      <p>
+        By signing up you agree to our
+        <a class="po" href="#">Terms of Service</a> and
+        <a class="po" href="#">Privacy Policy</a>
+      </p>
+    </form>
+
+    {% if messages %}
+    <script>
+      alertify.set('notifier', 'position', 'top-center');
+    
+      // Loop through Django messages and display them using Alertify
+      {% for message in messages %}
+        {% if 'error' in message.tags %}
+          alertify.error("{{ message|escapejs }}");
+        {% else %}
+          alertify.success("{{ message|escapejs }}");
+        {% endif %}
+      {% endfor %}
+    
+      // Check if there is a success message and redirect after 4 seconds
+      {% for message in messages %}
+        {% if 'success' in message.tags %}
+          setTimeout(function () {
+            window.location.href = "{% url 'log_in' %}";
+          }, 4000);  // 4000ms = 4 seconds
+        {% endif %}
+      {% endfor %}
+    </script>
+    {% endif %}
+  </div>
+</div>
+<script>
+  eyeicon = document.getElementById("eyeicon");
+  password = document.getElementById("password");
+  eyeicon.onclick = function () {
+    if (password.type == "password") {
+      password.type = "text";
+      eyeicon.classList.remove("fa-eye");
+      eyeicon.classList.add("fa-eye-slash");
+    } else {
+      password.type = "password";
+      eyeicon.classList.remove("fa-eye-slash");
+      eyeicon.classList.add("fa-eye");
+    }
+  };
+</script>
