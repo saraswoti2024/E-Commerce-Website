@@ -12,6 +12,7 @@ from .models import *
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 import re
+from django.contrib.auth.decorators import login_required
 from datetime import datetime
 import phonenumbers
 
@@ -19,9 +20,11 @@ import phonenumbers
 def home(request):
     return render(request,'webapp/home.html')
 
+@login_required(login_url='log_in')
 def blog(request):
     return render(request,'webapp/blog.html')
 
+@login_required(login_url='log_in')
 def About(request):
     return render(request,'webapp/About.html')
 
@@ -56,9 +59,11 @@ def contact(request):
             return redirect('contact')
     return render(request,'webapp/contact.html')
 
+@login_required(login_url='log_in') #log_in -> url (name="log_in")
 def cart(request):
     return render(request,'webapp/cart.html')
 
+@login_required(login_url='log_in')
 def shop(request):
     data = Product.objects.all()
     categoryy = Category.objects.all()
@@ -80,6 +85,7 @@ def shop(request):
         'data1' : data,
     }
     return render(request,'webapp/shop.html',context)  ##admin lai use garna abc-> admin page ma hernu
+
 
 def log_in (request):
     return render(request,'auth/log_in.html')
