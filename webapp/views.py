@@ -12,6 +12,7 @@ from .models import *
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 import re
+from datetime import datetime
 import phonenumbers
 
 # Create your views here.
@@ -31,11 +32,23 @@ def contact(request):
         phone = data.get('ph')
         address = data.get('address')
         message = data.get('message')
+        sliced_email = email[:5]
 
         try:
              user = Users(email=email,number=phone,address=address,messages=message)
              user.full_clean() ##models ma vako validate garxa herxa ,thikxa vane save hunxa
              user.save()
+
+             ##gmail starts
+             subject = "Thank you for Getting in Touch!"
+             message = render_to_string('webapp/gmail.html',{'email': sliced_email,'date':datetime.now()})
+             from_email = 'saraswotikhadka2k2@gmail.com'
+             recipient_list = [email]
+             emailmsg = EmailMessage(subject,message,from_email,recipient_list)
+             emailmsg.attach_file('webapp/static/images/knit-mitten-top.png')
+             emailmsg.send(fail_silently=True)
+             ##gmail ends
+
              messages.success(request,f" your form submitted successfully")
              return redirect('contact')
         except Exception as e:
@@ -118,5 +131,4 @@ def register(request):
             for error in error_messages:
                 messages.error(request,error)
             return redirect('register')           
-
     return render(request,'auth/register.html')
