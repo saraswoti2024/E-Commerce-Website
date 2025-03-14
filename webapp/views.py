@@ -92,18 +92,23 @@ def log_in (request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-       
+        remember = request.POST.get('remember')
+
         if not User.objects.filter(username=username).exists():
             messages.error(request,'username doesnot exist')
             return redirect('log_in')
         userauth = authenticate(username=username,password=password)
         if userauth is not None:
             login(request,userauth) ##creates session gives login access
-            nextv = request.POST['next'] #/shop/
-            if nextv:    
-                return redirect(nextv)
+            if remember:
+                request.session.set_expiry(120000000)
             else:
-                 return redirect('home')
+                request.session.set_expiry(0)   
+                next1 = request.POST.get('next','')
+                if next1 and next1 != 'None' and next1 != '':  
+                    return redirect(next1)  # Redirect to the 'next' URL if it's valid
+                else:
+                    return redirect('home')
         else:
             messages.error(request,'invalid password')
             return redirect('log_in')
@@ -129,12 +134,6 @@ def register(request):
 
         if password == uname:
             error_messages.append('username and password must be different')
-           
-        # if not re.search(r'[A-Z]',password): #capital letter
-        #     error_messages.append('Password must contain at least one capital letter')
-           
-        # if not re.search(r'\W',password): #specialcharacter
-        #     error_messages.append('Password must contain at least one Special character')
        
         if not re.search(r'\d',password): #numbers
             error_messages.append('Password Should at least contain one number')
