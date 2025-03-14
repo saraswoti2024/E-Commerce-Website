@@ -18,6 +18,7 @@
       sizes="192x192"
     />
 
+
     <title> </title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
@@ -48,6 +49,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" />
 
     <!-- custom css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -60,11 +63,13 @@
         <!-- From Uiverse.io by bociKond -->
         <form class="form" method="POST" action="{% url 'log_in' %}">
           {% csrf_token %}
+         
           <span class="input-span">
             <label for="username" class="label">User Name</label>
             <input type="text" name="username" id="email"
           /></span>
-          <!-- <input type="hidden" name="next" value="{{next}}"> -->
+          <!-- value= /shop/ , name='/shop/'(Store hunxa) then request.POST garerw value aauxa -->
+          <input type="hidden" name="next" value="{{next}}">  
           <span class="input-span">
             <label for="password" class="label">Password</label>
             <input type="password" name="password" id="password" />
@@ -85,6 +90,15 @@
         </form>
       </div>
     </div>
+    {% if messages %}
+    {% for message in messages  %}
+    <script>
+        alertify.set('notifier','position', 'top-center');
+        alertify.success('{{message}}');
+    </script>
+    {% endfor %}
+  {% endif %}
+  
     <script>
       eyeicon = document.getElementById("eyeicon");
       password = document.getElementById("password");

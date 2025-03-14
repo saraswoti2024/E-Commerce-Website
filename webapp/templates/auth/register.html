@@ -113,29 +113,29 @@
       </p>
     </form>
 
-    {% if messages %}
-    <script>
-      alertify.set('notifier', 'position', 'top-center');
-    
-      // Loop through Django messages and display them using Alertify
-      {% for message in messages %}
-        {% if 'error' in message.tags %}
-          alertify.error("{{ message|escapejs }}");
-        {% else %}
-          alertify.success("{{ message|escapejs }}");
-        {% endif %}
-      {% endfor %}
-    
-      // Check if there is a success message and redirect after 4 seconds
-      {% for message in messages %}
-        {% if 'success' in message.tags %}
-          setTimeout(function () {
-            window.location.href = "{% url 'log_in' %}";
-          }, 4000);  // 4000ms = 4 seconds
-        {% endif %}
-      {% endfor %}
-    </script>
+  {% if messages %}
+<script>
+  alertify.set('notifier', 'position', 'top-center');
+
+  // Loop through Django messages and display them using Alertify
+  {% for message in messages %}
+    {% if 'error' in message.tags %}
+      alertify.error("{{ message|escapejs }}");
+    {% else %}
+      alertify.success("{{ message|escapejs }}");
     {% endif %}
+  {% endfor %}
+
+  // Check if there is a success message and redirect after 4 seconds
+  {% for message in messages %}
+    {% if 'success' in message.tags %}
+      setTimeout(function () {
+        window.location.href = "{% url 'log_in' %}";
+      }, 4000);  // 4000ms = 4 seconds
+    {% endif %}
+  {% endfor %}
+</script>
+{% endif %}
   </div>
 </div>
 <script>

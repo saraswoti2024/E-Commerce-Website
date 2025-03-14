@@ -22,14 +22,18 @@
             <li><a href="{% url 'blog' %}">Blog</a></li>
             <li><a href="{% url 'About' %}">About</a></li>
             <li><a href="{% url 'contact' %}">Contact Us</a></li>
+             {% if request.user.is_authenticated %}
+             <!-- #user-> User model ko object ho ,is_authenticated->logged in  -->
+                <li><a  class="btt" href="{% url 'log_out' %}"><button class="button2">Logout</button></a></li>
+            {% else %}
             <li><button><a class="btt" href="{% url 'log_in' %}">Login</a></button></li>
             <li><button><a class="btt" href="{% url 'register' %}">Register</a></button></li>
+            {% endif %}
             <li><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a></li>
             <form method="GET" action="{% url 'shop' %}">
                 <input type="text" name="searches" placeholder="Search products" class="sear">
                 <!-- <button type="submit" class="sears">Search</button> -->
             </form>
-       
         </ul>
        </div>
        </section>

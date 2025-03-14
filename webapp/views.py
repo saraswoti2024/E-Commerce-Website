@@ -14,6 +14,7 @@ from django.core.exceptions import ValidationError
 import re
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from django.contrib.auth import authenticate,login,logout
 import phonenumbers
 
 # Create your views here.
@@ -88,7 +89,26 @@ def shop(request):
 
 
 def log_in (request):
-    return render(request,'auth/log_in.html')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+       
+        if not User.objects.filter(username=username).exists():
+            messages.error(request,'username doesnot exist')
+            return redirect('log_in')
+        userauth = authenticate(username=username,password=password)
+        if userauth is not None:
+            login(request,userauth) ##creates session gives login access
+            nextv = request.POST['next'] #/shop/
+            if nextv:    
+                return redirect(nextv)
+            else:
+                 return redirect('home')
+        else:
+            messages.error(request,'invalid password')
+            return redirect('log_in')
+    next = request.GET.get('next')
+    return render(request,'auth/log_in.html',{'next': next})
 
 def register(request):
     if request.method=='POST':
@@ -138,3 +158,10 @@ def register(request):
                 messages.error(request,error)
             return redirect('register')           
     return render(request,'auth/register.html')
+
+# logout(request):
+# Clears the session.
+# Logs out the user.
+def log_out(request):
+    logout(request)
+    return redirect('home')
