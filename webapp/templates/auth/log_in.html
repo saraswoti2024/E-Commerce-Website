@@ -79,7 +79,7 @@
           <input class="remember" type="checkbox" value="remember"  name="remember"/>
           <a href="#">Remember me</a>
         </span>
-          <span class="span"><a href="#">Forgot password?</a>
+          <span class="span"><a href="{% url 'password_reset' %}">Forgot password?</a>
             <a href="{% url 'change_password' %}">Change password</a></span>
 
           <input class="submit" type="submit" value="Login" />
