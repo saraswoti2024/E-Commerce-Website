@@ -16,6 +16,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.auth import authenticate,login,logout
 import phonenumbers
+from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
 def home(request):
@@ -70,7 +71,7 @@ def shop(request):
     categoryy = Category.objects.all()
 
     cateid = request.GET.get('Categ') 
-    searched = request.GET.get('searches')  
+    searched = request.GET.get('searches')   #sa
     if cateid :
         data = Product.objects.filter(Category1=cateid)
  
@@ -104,11 +105,11 @@ def log_in (request):
                 request.session.set_expiry(120000000)
             else:
                 request.session.set_expiry(0)   
-                next1 = request.POST.get('next','')
-                if next1 and next1 != 'None' and next1 != '':  
-                    return redirect(next1)  # Redirect to the 'next' URL if it's valid
-                else:
-                    return redirect('home')
+            next1 = request.POST.get('next','')
+            if next1 and next1 != 'None' and next1 != '':  
+                return redirect(next1)  # Redirect to the 'next' URL if it's valid
+            else:
+                return redirect('home')
         else:
             messages.error(request,'invalid password')
             return redirect('log_in')
@@ -164,3 +165,21 @@ def register(request):
 def log_out(request):
     logout(request)
     return redirect('home')
+
+
+##password change
+
+@login_required(login_url='log_in')
+def change_password(request):
+    form = PasswordChangeForm(user=request.user) #empty form is created oldp,newp,confp blank
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user,data = request.POST) #user-> tyo user lai lyauxa, data-> oldp,conp,newp lekoeko lai data ma store garxa value in dict form which is as below 
+#         request.POST = {
+#     'old_password': 'current_password_123', #lee12, 
+#     'new_password1': 'new_password_123',
+#     'new_password2': 'new_password_123',
+# } 
+        if form.is_valid(): #oldp and newp matches, length complexity of password herxa
+            form.save() #saves the newp  in database
+            return redirect('log_in')
+    return render(request,'auth/change_password.html',{'form': form})
