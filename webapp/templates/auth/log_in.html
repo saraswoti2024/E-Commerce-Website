@@ -77,10 +77,12 @@
           </span>
           <span class="span">
           <input class="remember" type="checkbox" value="remember"  name="remember"/>
-          <a href="#">Remember me</a>
+          Remember me
         </span>
           <span class="span"><a href="{% url 'password_reset' %}">Forgot password?</a>
             <a href="{% url 'change_password' %}">Change password</a></span>
+            <button><a href="{% url 'social:begin' 'google-oauth2' %}">google</a></button>
+            <button><a href="{% url 'social:begin' 'github' %}">github</a></button>
 
           <input class="submit" type="submit" value="Login" />
           <span
