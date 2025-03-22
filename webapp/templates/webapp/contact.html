@@ -6,30 +6,22 @@
     <form class="form" method="POST" action="{% url 'contact' %}"  id="ContactForm">
         {% csrf_token %}
         {% if messages %}
-            <div id="msg">
-            {% for message1 in messages  %}
-            <div class="alert alert-{{message1.tags}} alert-dismissible fade show" role="alert">
-            {{message1}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
-            </div>
+        {% for message in messages  %}
+        <div class="alert alert-{{message.tags}}">{{message}}</div>
+        {% endfor %}
+  
         {% endif %}
-        <div class="title">Contact us</div>
-        <input type="text" placeholder="Your email" class="input" name="email">  
-        <input type="tel" placeholder="Phone Number" class="input" name="ph" id="phone"> 
-        <span style="color: red; display: none;" id="error_msg">Invalid Phone Number</span>
-        <input type="text" placeholder="Address" class="input" name="address"> 
-        <textarea placeholder="Your message" name="message"></textarea>
+        {{ form.email.label_tag }} {{ form.email }}
+        {{ form.address.label_tag }} {{ form.address }}
+        
+        <!-- Phone Number Field -->
+        {{ form.phonenumber.label_tag }}
+        {{ form.phonenumber }}
+        <span id="error_msg" style="color: red; display: none;">
+            Invalid phone number.
+        </span>
+        {{ form.message.label_tag }} {{ form.message }}
         <button type="submit">Submit</button>
     </form>
     </div>
-    <script>
-        setTimeout(function(){
-          const msg = document.getElementById('msg')
-          if(msg){
-            msg.style.display='none'
-          }
-        },5000)
-      </script>
 {% endblock content %}

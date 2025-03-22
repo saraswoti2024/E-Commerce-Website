@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center mb-4">Welcome, {{ user.username }}!</h2>
+
+            <!-- User Information -->
+            <div class="row">
+                <div class="col-md-4">
+                    {% if images %}
+                    <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle" alt="Profile Picture">
+                    {% else %}
+                    <img src="{% static 'images/profile.jpeg' %}" class="img-fluid rounded-circle" alt="Profile Picture">
+                      
+                    {% endif %}
+                   
+                </div>
+
+                <div class="col-md-8">
+                    <h4>User Details</h4>
+                    <p><strong>First Name:</strong> {{ request.user.first_name }}</p>
+                    <p><strong>Last Name:</strong> {{ request.user.last_name }}</p>
+                    <p><strong>Username:</strong> {{ request.user.username }}</p>
+                    <p><strong>Bio:</strong>hello</p>
+                    <p><strong>Email:</strong> {{ request.user.email }}</p>
+
+                    <div><a href="{% url 'profile_edit' %}" class="btn btn-danger">Edit</a></div>
+                    <!-- <a href="{% url 'log_out' %}" class="btn btn-danger">Logout</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

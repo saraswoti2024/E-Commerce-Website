@@ -1,5 +1,6 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Category(models.Model):
@@ -20,6 +21,13 @@ class Product(models.Model):
 
 class Users(models.Model):
     email = models.EmailField(null=True,unique=True)
-    number = PhoneNumberField(null=True,region='NP')
+    number = PhoneNumberField(null=True)
     messages = models.TextField(null=True)
     address = models.TextField(null=True)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True, null=True)
+    profile_image = models.ImageField(upload_to='profile_images/')
+    def __str__(self):
+        return self.user.username

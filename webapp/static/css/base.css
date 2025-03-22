@@ -86,7 +86,7 @@ button.white {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 80px;
+    padding: 5px 40px;
     background-color: rgba(187, 161, 111, 0.784);
     box-shadow: 0 5px 15px rgb(111, 104, 66);
     z-index: 999;

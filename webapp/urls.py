@@ -13,6 +13,8 @@ urlpatterns = [
     path('login/',log_in,name="log_in"),
     path('register/',register,name="register"),
     path('logout/',log_out,name="log_out"),
+    path('profileboard/',profileboard,name="profileboard"),
+    path('profile_edit/',profileedit,name="profile_edit"),
     #for forgot password when password is not known end
     path('change_password/',change_password,name="change_password"),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),

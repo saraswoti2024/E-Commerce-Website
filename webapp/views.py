@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Product,Users
+from .models import *
 from django.contrib import messages 
 from django.contrib import messages
 from django.db.models import Q
@@ -17,6 +17,7 @@ from datetime import datetime
 from django.contrib.auth import authenticate,login,logout
 import phonenumbers
 from django.contrib.auth.forms import PasswordChangeForm
+from .forms import ContactForms
 
 # Create your views here.
 def home(request):
@@ -31,19 +32,17 @@ def About(request):
     return render(request,'webapp/About.html')
 
 def contact(request):
+    form = ContactForms()
     if request.method=='POST':
-        data = request.POST
-        email = data.get('email')
-        phone = data.get('ph')
-        address = data.get('address')
-        message = data.get('message')
-        sliced_email = email[:5]
-
+        form = ContactForms(request.POST)
+        if form.is_valid(): 
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            address = form.cleaned_data['address']
+            phone = form.cleaned_data['phonenumber']
+            sliced_email = email[:5]
         try:
-             user = Users(email=email,number=phone,address=address,messages=message)
-             user.full_clean() ##models ma vako validate garxa herxa ,thikxa vane save hunxa
-             user.save()
-
+             Users.objects.create(email=email,number=phone,address=address,messages=message)
              ##gmail starts
              subject = "Thank you for Getting in Touch!"
              message = render_to_string('webapp/gmail.html',{'email': sliced_email,'date':datetime.now()})
@@ -53,13 +52,12 @@ def contact(request):
              emailmsg.attach_file('webapp/static/images/knit-mitten-top.png')
              emailmsg.send(fail_silently=True)
              ##gmail ends
-
              messages.success(request,f" your form submitted successfully")
              return redirect('contact')
         except Exception as e:
             messages.error(request,f"Error: {str(e)}")
             return redirect('contact')
-    return render(request,'webapp/contact.html')
+    return render(request,'webapp/contact.html',{'form':form})
 
 @login_required(login_url='log_in') #log_in -> url (name="log_in")
 def cart(request):
@@ -183,3 +181,9 @@ def change_password(request):
             form.save() #saves the newp  in database
             return redirect('log_in')
     return render(request,'auth/change_password.html',{'form': form})
+
+def profileboard(request):
+    return render(request,'profile/profileboard.html')
+
+def profileedit(request):
+    return render(request,'profile/profile_edit.html')
