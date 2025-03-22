@@ -1,7 +1,3 @@
 # E-Commerce-Website #famous_brand_ecommerce_website #aesthetic website
-E-commerce Website using python django
+E-commerce Website using python django named 'limited'
 
-##to run 
-python manage.py makemigrations
-python manage.py migrate
-python manage.py runserver
